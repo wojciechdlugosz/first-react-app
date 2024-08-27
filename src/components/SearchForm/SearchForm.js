@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 import styles from "./SearchForm.module.scss";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { filterCards } from "../../redux/store";
 
 const SearchForm = () => {
     
@@ -12,7 +13,7 @@ const SearchForm = () => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        dispatch({ type: "FILTER_CARDS", payload: search });
+        dispatch(filterCards(search));
         setSearch("");
     };
 
