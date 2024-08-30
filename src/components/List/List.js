@@ -13,15 +13,14 @@ const List = () => {
 
     const columns = useSelector((state) => getColumnsByList(state, listId));
     const listData = useSelector((state) => getListById(state, listId));
-    const { title, description } = listData;
 
     if(!listData) return <Navigate to="/" />
     return (
       <div className={styles.list}>
         <header className={styles.header}>
-          <h2 className={styles.title}>{title}</h2>
+          <h2 className={styles.title}>{listData.title}</h2>
         </header>
-        <p className={styles.description}>{description}</p>
+        <p className={styles.description}>{listData.description}</p>
         <SearchForm />
         <section className={styles.columns}>
           {columns.map((column) => (
