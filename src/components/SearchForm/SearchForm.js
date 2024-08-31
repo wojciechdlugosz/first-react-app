@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 import styles from "./SearchForm.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { changeFilterCards, getSearchString } from "../../redux/store";
+import { getSearchString, changeFilterCards } from "../../redux/filterCardsRedux";
 
 const SearchForm = () => {
     

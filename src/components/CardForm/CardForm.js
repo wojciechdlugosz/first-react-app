@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import shortid from "shortid";
 import styles from "../CardForm/CardForm.module.scss";
-import { addCard } from "../../redux/store";
+import { addCard } from "../../redux/cardsRedux";
 
 const CardForm = (props) => {
 
