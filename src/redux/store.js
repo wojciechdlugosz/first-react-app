@@ -1,6 +1,10 @@
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 import initialState from "./initialState";
 import strContains from "../utils/strContains";
+import listsReducer from "./listsRedux";
+import columnsReducer from "./columnsRedux";
+import cardsReducer from "./cardsRedux";
+import filterCardsReducer from "./filterCardsRedux";
 
 //selectors
 export const getFilteredCards = ({ cards, filterCards }, columnId) =>
@@ -26,31 +30,32 @@ export const getFavoriteCards = ({ cards }) =>
 // action creators
 export const addColumn = (payload) => ({ type: "ADD_COLUMN", payload });
 export const addCard = (payload) => ({ type: "ADD_CARD", payload });
-export const filterCards = (payload) => ({ type: "FILTER_CARDS", payload });
+export const changeFilterCards = (payload) => ({ type: "FILTER_CARDS", payload });
 export const addList = (payload) => ({ type: "ADD_LIST", payload });
-export const toggleCardFavorite = (payload) => ({ type: 'TOGGLE_CARD_FAVORITE', payload });
+export const toggleCardFavorite = (payload) => ({
+  type: "TOGGLE_CARD_FAVORITE",
+  payload,
+});
 
-const reducer = (state, action) => {
+/*const filterCardsReducer = (statePart = "", action) => {
   switch (action.type) {
-    case "ADD_COLUMN":
-      return { ...state, columns: [...state.columns, action.payload] };
-
-    case "ADD_CARD":
-      return { ...state, cards: [...state.cards, action.payload] };
 
     case "FILTER_CARDS":
-      return { ...state, filterCards: action.payload };
 
-    case "ADD_LIST":
-      return { ...state, lists: [...state.lists, action.payload ]};
-
-    case 'TOGGLE_CARD_FAVORITE':
-      return { ...state, cards: state.cards.map(card => (card.id === action.payload) ? { ...card, isFavorite: !card.isFavorite } : card) };
-
+    return action.payload;
     default:
-      return state;
+      return statePart;
   }
+};*/
+
+const subreducers = {
+  lists: listsReducer,
+  columns: columnsReducer,
+  cards: cardsReducer,
+  filterCards: filterCardsReducer
 };
+
+const reducer = combineReducers(subreducers);
 
 const store = createStore(
   reducer,
